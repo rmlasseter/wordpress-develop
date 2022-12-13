@@ -49,10 +49,20 @@ if ( file_exists( ABSPATH . 'wp-config.php' ) ) {
 	/** The config file resides in ABSPATH */
 	require_once ABSPATH . 'wp-config.php';
 
+	if ( ! defined( 'WPINC' ) ) {
+		/** wp-settings.php was not loaded by wp-config.php, load it now */
+		require_once ABSPATH . 'wp-settings.php';
+	}
+
 } elseif ( @file_exists( dirname( ABSPATH ) . '/wp-config.php' ) && ! @file_exists( dirname( ABSPATH ) . '/wp-settings.php' ) ) {
 
 	/** The config file resides one level above ABSPATH but is not part of another installation */
 	require_once dirname( ABSPATH ) . '/wp-config.php';
+
+	if ( ! defined( 'WPINC' ) ) {
+		/** wp-settings.php was not loaded by wp-config.php, load it now */
+		require_once ABSPATH . 'wp-settings.php';
+	}
 
 } else {
 
